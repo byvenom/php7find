@@ -1,0 +1,119 @@
+package cals;
+
+import java.io.*;
+
+public class backup {
+	
+	
+
+	private static void ListFile(String strDirPath) throws IOException {
+		String a = "[";
+		String b = "]";
+		String c = "$";
+		String d = "'";
+		String e = "\"";
+		String f = ".php";
+		String save = "php7확인.txt";
+		File dir = new File(strDirPath);
+		// 읽어들일 디렉토리의 객체
+		
+		
+
+		if (!dir.isDirectory()) {
+			// 디렉토리가 아니거나 없으면 종료
+			System.out.println(strDirPath + "찾을수 없는 폴더 or 경로 입니다.");
+			System.exit(0);
+		}
+
+		// 저장할 파일 output stream 생성
+		PrintWriter writer = new PrintWriter(new FileWriter(save,true));
+
+		// 읽어들일 파일 input stream 선언
+		BufferedReader br = null;
+
+		// 해당 디렉토리의 모든 파일을 리스트화
+		File[] files = dir.listFiles();
+		
+		for (int i = 0; i < files.length; i++) {
+			int y = 0;
+			// 파일이 아닌 경우 continue
+			
+			if (files[i].isDirectory()) {
+
+				ListFile(files[i].getPath());
+				continue;
+				
+
+			}
+			
+			
+			// input stream object 생성
+			br = new BufferedReader(new FileReader(files[i]));
+			String line = "";
+
+			// 각 파일의 한 라인씩 읽어들인다.
+			
+			if(files[i].getName().length()>=4) {
+			if(files[i].getName().substring(files[i].getName().length()-4, files[i].getName().length()).equals(f)) {
+			
+			while ((line = br.readLine()) != null) {
+				// 라인 내용중 검색하고자 단어가 있으면 파일에 기록한다.
+				y++;
+				int lineCnt = 0;
+				int fromIndex = -1;
+				System.out.println(files[i].getPath());
+				while ((fromIndex = line.indexOf(a, fromIndex + 1)) >= 0) {
+					lineCnt++;
+				}
+				for (int g = 0; g <=lineCnt; g++) {
+					if(line.contains("#")==true||line.contains("//")==true||line.contains("<--")==true||line.contains("-->")==true)
+					{
+						continue;
+					}
+					if (line.indexOf(a) != -1) {
+						
+						int wcA = line.indexOf(a);
+						int wcB = line.indexOf(b)+1;
+						if(wcA>=wcB) {
+							continue;
+						}
+						
+						String find = line.substring(wcA, wcB);
+						//System.out.println("line1:"+line);
+						line = line.replace(find, "").trim();
+						
+						if (find.contains(c) == false && find.contains(d) == false && find.contains(e) == false&&find.matches(".*[0-9].*")==false&&find.matches(".*[가-힣].*")==false&&find.equals("[]")==false){
+							writer.write(files[i].getAbsolutePath() + "(line:" + y +", check:"+find+ ")\n");
+							
+							
+							//System.out.println("line2:"+line);
+						}
+					}
+					
+					
+				}
+			}
+
+			writer.flush();
+		}
+			else {
+				continue;
+			}
+		}
+			else {continue;}
+		}
+		
+
+		// input stream close.
+		
+
+		// output stream close.
+		writer.close();
+	}
+
+	public static void main(String args[]) throws IOException {
+		String baseDir = "C:\\test"; // 검색할 디렉토리
+		ListFile(baseDir);
+		System.out.println("성공");
+	}
+}
