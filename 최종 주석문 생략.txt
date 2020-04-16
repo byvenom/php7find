@@ -96,7 +96,7 @@ public class backup {
 						}
 						for (int g = 0; g <= lineCnt; g++) {
 							int equal=0;
-							if(line.contains("<script type=\"text/javascript\">")||line.contains("<script language=\"javascript\">")) {
+							if(line.contains("<script")) {
 								javascr=false;
 							}
 							if(line.contains("</script>")) {
