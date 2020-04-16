@@ -3,7 +3,7 @@ package cals;
 import java.io.*;
 
 public class backup {
-	private static boolean numcheck(String glow) {
+	private static boolean numcheck(String glow) { //파일이나 경로에 숫자가 6자리 이상 포함된 것들을 제외하기위해 만든 함수
 		int num=0;
 		
 		for(int tmp=0;tmp<glow.length();tmp++) {
