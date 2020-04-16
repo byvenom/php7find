@@ -108,7 +108,7 @@ public class backup {
 							if(line.contains("*/")) {
 								jooseak=true;
 							}
-							if(line.contains("<--")) {
+							if(line.contains("<!--")) {
 								jooseak=false;
 							}
 							if(line.contains("-->")) {
