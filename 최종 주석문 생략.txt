@@ -94,6 +94,13 @@ public class backup {
 							lineCnt++;
 						}
 						for (int g = 0; g <= lineCnt; g++) {
+							if(line.contains("<script type=\"text/javascript\">")) {
+								jooseak=false;
+							}
+							if(line.contains("</script>")) {
+								jooseak=true;   // 자바 스크립트문을 피하기위한 if문
+							}
+							
 							if(line.contains("/*")) {
 								jooseak=false;
 							}
