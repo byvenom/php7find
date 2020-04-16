@@ -95,6 +95,7 @@ public class backup {
 							lineCnt++;
 						}
 						for (int g = 0; g <= lineCnt; g++) {
+							int equal=0;
 							if(line.contains("<script type=\"text/javascript\">")) {
 								javascr=false;
 							}
@@ -110,8 +111,9 @@ public class backup {
 							}
 							if(line.contains("<!--")) {
 								jooseak=false;
+								equal=g;
 							}
-							if(line.contains("-->")) {
+							if(line.contains("-->")&&equal!=g) {
 								jooseak=true;
 							}
 							if (line.contains("#") == true || line.contains("//") == true) {
