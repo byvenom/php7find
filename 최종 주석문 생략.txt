@@ -31,6 +31,7 @@ public class backup {
 		String f = ".php";
 		String save = "php7확인.txt";
 		boolean jooseak = true;
+		boolean javascr = true;
 		File dir = new File(strDirPath);
 		// 읽어들일 디렉토리의 객체
 
@@ -95,10 +96,10 @@ public class backup {
 						}
 						for (int g = 0; g <= lineCnt; g++) {
 							if(line.contains("<script type=\"text/javascript\">")) {
-								jooseak=false;
+								javascr=false;
 							}
 							if(line.contains("</script>")) {
-								jooseak=true;   // 자바 스크립트문을 피하기위한 if문
+								javascr=true;   // 자바 스크립트문을 피하기위한 if문
 							}
 							
 							if(line.contains("/*")) {
@@ -125,7 +126,7 @@ public class backup {
 
 								if (find.contains(c) == false && find.contains(d) == false && find.contains(e) == false
 										&& find.matches(".*[0-9].*") == false && find.matches(".*[가-힣].*") == false
-										&& find.equals("[]") == false&&jooseak==true) {
+										&& find.equals("[]") == false&&jooseak==true&&javascr==true) {
 									writer.write(files[i].getAbsolutePath() + "(line:" + y + ", check:" + find + ")\n");
 
 									// 괄호안 판별
