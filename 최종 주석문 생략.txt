@@ -108,8 +108,13 @@ public class backup {
 							if(line.contains("*/")) {
 								jooseak=true;
 							}
-							if (line.contains("#") == true || line.contains("//") == true
-									|| line.contains("<--") == true || line.contains("-->") == true) {
+							if(line.contains("<--")) {
+								jooseak=false;
+							}
+							if(line.contains("-->")) {
+								jooseak=true;
+							}
+							if (line.contains("#") == true || line.contains("//") == true) {
 								continue; //주석문을 피하기위한 if문
 							}
 							if (line.indexOf(a) != -1) {
